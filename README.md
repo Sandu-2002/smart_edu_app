@@ -1,17 +1,63 @@
-# smart_edu_app
+# 🎓 Smart Edu
 
-A new Flutter project.
+> Empowering Education with Smart Technology
 
-## Getting Started
+Smart Edu is a modern and user-friendly school management application designed to connect **Students, Parents, Teachers, and Administrators** on a single platform. It simplifies daily academic and administrative tasks while creating a smarter, faster, and more organized learning environment.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### 👨‍🎓 Student Panel
+- View personal dashboard  
+- Access timetable  
+- Check results & grades  
+- Read short notes & study materials  
+- Manage profile  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 👨‍👩‍👧 Parent Panel
+- Monitor student progress  
+- View exam results  
+- Communicate with teachers  
+- Manage profile  
+
+### 👨‍🏫 Teacher Panel
+- Mark attendance  
+- Manage student results  
+- Upload homework & resources  
+- View timetable  
+- Manage profile  
+
+### 🛠️ Admin Panel
+- Add / manage students, parents, teachers  
+- Post school notices  
+- Generate user IDs  
+- Manage system data  
+- Dashboard analytics  
+
+---
+
+## 🚀 Tech Stack
+
+- **Flutter** – Cross-platform mobile development  
+- **Firebase** – Authentication & Database  
+- **Web Admin Panel** – Management dashboard  
+
+---
+
+## 📱 Goal
+
+To build a complete digital education ecosystem that improves communication, management, and learning experiences for schools.
+
+---
+
+## 💡 Vision
+
+Making school management smarter, simpler, and more connected.
+
+---
+
+## 👨‍💻 Developed By
+
+**Group 13**  
+Smart Edu Project Team
