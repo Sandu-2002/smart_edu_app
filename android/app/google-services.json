@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "629275070223",
+    "project_id": "smart-edu-app-c82d8",
+    "storage_bucket": "smart-edu-app-c82d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629275070223:android:654f94db1f10ed2f36387a",
+        "android_client_info": {
+          "package_name": "com.example.smart_edu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629275070223-bve9qed7p0608mi66mpct1esu3kngaou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBktMsgl9ZX2VVgVIoIAzYipSjhWQm1o7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629275070223-bve9qed7p0608mi66mpct1esu3kngaou.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "629275070223-vdipojoluupc5uqipu2t0bjclm9qvls7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartEduApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
