@@ -1,0 +1,3 @@
+class StorageRemoteDataSource {
+  const StorageRemoteDataSource();
+}
