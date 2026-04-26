@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/widgets/top_blue_header.dart';
 import '../../core/widgets/app_text_field.dart';
+import '../../core/widgets/app_button.dart';
+import '../../core/routes/route_names.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
 
-          /// form UI
+          /// form UI and actions
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
@@ -111,6 +114,32 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// Forgot Password
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () =>
+                          context.go(RouteNames.forgotPassword),
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: AppColors.primaryBlue,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  ///Sign In Button
+                  AppButton(
+                    text: loading ? 'Signing in...' : 'Sign in',
+                    onTap: loading ? null : () {},
                   ),
                 ],
               ),
