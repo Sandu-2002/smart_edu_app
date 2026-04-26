@@ -14,6 +14,7 @@ class PostNoticeScreen extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 760),
           child: SafeArea(
             child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 28),
               child: Column(
                 children: [
                   TopBlueHeader(
@@ -41,12 +42,68 @@ class PostNoticeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+
+                  const Padding(
+                    padding: EdgeInsets.all(18),
+                    child: _NoticeFormCard(),
+                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _NoticeFormCard extends StatelessWidget {
+  const _NoticeFormCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: const [
+          _SectionTitle(title: 'Notice Information'),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionTitle extends StatelessWidget {
+  final String title;
+
+  const _SectionTitle({required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 5,
+          height: 20,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
     );
   }
 }
