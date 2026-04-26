@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/widgets/top_blue_header.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -70,10 +71,49 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
 
-          ///temporary placeholder for the login form
-          const Expanded(
-            child: Center(
-              child: Text('Login Form Here'),
+          /// form UI
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
+              child: Column(
+                children: [
+                  AppTextField(
+                    label: 'Email Address',
+                    hintText: 'example@email.com',
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(height: 18),
+                  Stack(
+                    alignment: Alignment.centerRight,
+                    children: [
+                      AppTextField(
+                        label: 'Password',
+                        hintText: '••••••••',
+                        obscureText: obscurePassword,
+                        controller: passwordController,
+                      ),
+                      Positioned(
+                        right: 14,
+                        bottom: 18,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              obscurePassword = !obscurePassword;
+                            });
+                          },
+                          child: Icon(
+                            obscurePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppColors.mutedText,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
