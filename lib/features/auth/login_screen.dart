@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/widgets/top_blue_header.dart';
-import '../../core/widgets/app_text_field.dart';
-import '../../core/widgets/app_button.dart';
 import '../../core/routes/route_names.dart';
+import '../../core/widgets/app_button.dart';
+import '../../core/widgets/app_text_field.dart';
+import '../../core/widgets/top_blue_header.dart';
+import '../../di/injection.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,6 +27,68 @@ class _LoginScreenState extends State<LoginScreen> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> handleLogin() async {
+    FocusScope.of(context).unfocus();
+
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      _showSnack('Please enter email and password');
+      return;
+    }
+
+    setState(() => loading = true);
+
+    try {
+      await authRepository.login(email: email, password: password);
+
+      final user = authRepository.currentUser;
+
+      if (user == null) {
+        throw Exception('Login failed');
+      }
+
+      final appUser = await userRepository.getUserByUid(user.uid);
+
+      if (!mounted) return;
+
+      if (appUser == null) {
+        throw Exception('User profile not found in Firestore');
+      }
+
+      switch (appUser.role) {
+        case 'student':
+          context.go(RouteNames.studentShell);
+          break;
+        case 'parent':
+          context.go(RouteNames.parentShell);
+          break;
+        case 'teacher':
+          context.go(RouteNames.teacherShell);
+          break;
+        case 'admin':
+          context.go(RouteNames.adminShell);
+          break;
+        default:
+          throw Exception('Unknown user role');
+      }
+    } catch (e) {
+      if (!mounted) return;
+      _showSnack('Login failed. Check email, password, and Firestore role.');
+    } finally {
+      if (mounted) {
+        setState(() => loading = false);
+      }
+    }
+  }
+
+  void _showSnack(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -65,21 +128,38 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   'School Management System',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 15, color: Colors.white70),
                 ),
               ],
             ),
           ),
-
-          /// form UI and actions
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
               child: Column(
                 children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 14,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF8EBC2),
+                      border: Border.all(color: const Color(0xFFE4B03A)),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Text(
+                      'Login to continue',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFCB5F3C),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 28),
                   AppTextField(
                     label: 'Email Address',
                     hintText: 'example@email.com',
@@ -115,15 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 10),
-
-                  /// Forgot Password
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () =>
-                          context.go(RouteNames.forgotPassword),
+                      onPressed: () => context.go(RouteNames.forgotPassword),
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -133,13 +209,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
-                  ///Sign In Button
                   AppButton(
                     text: loading ? 'Signing in...' : 'Sign in',
-                    onTap: loading ? null : () {},
+                    onTap: loading ? null : handleLogin,
                   ),
                 ],
               ),
