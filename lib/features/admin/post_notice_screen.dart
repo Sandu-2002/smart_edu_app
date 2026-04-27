@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/widgets/top_blue_header.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class PostNoticeScreen extends StatelessWidget {
   const PostNoticeScreen({super.key});
@@ -72,6 +73,28 @@ class _NoticeFormCard extends StatelessWidget {
       child: Column(
         children: const [
           _SectionTitle(title: 'Notice Information'),
+          SizedBox(height: 14),
+
+          AppTextField(
+            label: 'Subject',
+            hintText: 'Enter notice title',
+            keyboardType: TextInputType.text,
+          ),
+          SizedBox(height: 14),
+
+          AppTextField(
+            label: 'Audience',
+            hintText: 'Students / Parents / Teachers',
+            keyboardType: TextInputType.text,
+          ),
+          SizedBox(height: 14),
+
+          AppTextField(
+            label: 'Notice Body',
+            hintText: 'Write the full notice content here',
+            maxLines: 6,
+            keyboardType: TextInputType.multiline,
+          ),
         ],
       ),
     );
@@ -90,10 +113,7 @@ class _SectionTitle extends StatelessWidget {
         Container(
           width: 5,
           height: 20,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          color: Colors.blue,
         ),
         const SizedBox(width: 10),
         Text(
