@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/route_names.dart';
+import '../../core/widgets/app_text_field.dart';
+import '../../core/widgets/app_button.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -108,6 +110,35 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                     child: Column(
                       children: [
+                        Container(
+                          width: 78,
+                          height: 78,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD7DDF4),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.lock_reset_rounded,
+                            size: 38,
+                            color: AppColors.primaryBlue,
+                          ),
+                        ),
+
+                        const SizedBox(height: 22),
+
+                        AppTextField(
+                          controller: emailController,
+                          label: 'Email Address',
+                          hintText: 'example@email.com',
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+
+                        const SizedBox(height: 22),
+
+                        AppButton(
+                          text: loading ? 'Please wait...' : 'Send Reset Link',
+                          onTap: loading ? null : resetPassword,
+                        ),
                       ],
                     ),
                   ),
