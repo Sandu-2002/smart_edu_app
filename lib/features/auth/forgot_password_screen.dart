@@ -56,6 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 IconButton(
                   onPressed: () => context.go(RouteNames.login),
@@ -66,7 +67,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                 const Text(
                   'Forgot Password',
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textBlack,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                const Text(
+                  'Enter your registered email address to receive a password reset link.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.mutedText,
+                    height: 1.5,
+                  ),
                 ),
               ],
             ),
