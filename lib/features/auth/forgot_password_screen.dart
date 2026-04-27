@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../core/constants/app_colors.dart';
+import '../../core/routes/route_names.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -46,8 +50,28 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Forgot Password'),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                IconButton(
+                  onPressed: () => context.go(RouteNames.login),
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                ),
+
+                const SizedBox(height: 12),
+
+                const Text(
+                  'Forgot Password',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
