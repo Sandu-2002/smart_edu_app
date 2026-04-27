@@ -40,7 +40,7 @@ class TeacherProfileScreen extends StatelessWidget {
                 ),
               ),
 
-              /// 🔽 Profile Info Section
+              // Profile + Stats Section
               Padding(
                 padding: const EdgeInsets.all(18),
                 child: Column(
@@ -80,6 +80,11 @@ class TeacherProfileScreen extends StatelessWidget {
                       value: '+94 77 987 6543',
                       icon: Icons.phone_outlined,
                     ),
+
+                    SizedBox(height: 18),
+
+                    //Teacher Stats Section Added
+                    _TeacherStatsSection(),
                   ],
                 ),
               ),
@@ -147,6 +152,144 @@ class _ProfileInfoCard extends StatelessWidget {
                   value,
                   style: const TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textBlack,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TeacherStatsSection extends StatelessWidget {
+  const _TeacherStatsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.borderBlue, width: 1.2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x12000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Teaching Summary',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textBlack,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: const [
+              Expanded(
+                child: _MiniStatCard(
+                  title: 'Classes',
+                  value: '04',
+                  icon: Icons.class_outlined,
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: _MiniStatCard(
+                  title: 'Students',
+                  value: '128',
+                  icon: Icons.groups_outlined,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: const [
+              Expanded(
+                child: _MiniStatCard(
+                  title: 'Attendance',
+                  value: '96%',
+                  icon: Icons.fact_check_outlined,
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: _MiniStatCard(
+                  title: 'Avg Marks',
+                  value: '82%',
+                  icon: Icons.auto_graph_outlined,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniStatCard extends StatelessWidget {
+  final String title;
+  final String value;
+  final IconData icon;
+
+  const _MiniStatCard({
+    required this.title,
+    required this.value,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.borderSoft),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: const Color(0xFFD7DDF4),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppColors.primaryBlue, size: 20),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.mutedText,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 18,
                     fontWeight: FontWeight.w700,
                     color: AppColors.textBlack,
                   ),
