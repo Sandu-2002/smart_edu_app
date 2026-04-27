@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/routes/route_names.dart';
-import '../../core/widgets/app_text_field.dart';
 import '../../core/widgets/app_button.dart';
+import '../../core/widgets/app_text_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -15,6 +15,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
+
   bool loading = false;
 
   Future<void> resetPassword() async {
@@ -39,8 +40,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void _showSnack(String text) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(text)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 
   @override
@@ -66,9 +66,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     onPressed: () => context.go(RouteNames.login),
                     icon: const Icon(Icons.arrow_back_ios_new_rounded),
                   ),
-
                   const SizedBox(height: 12),
-
                   const Text(
                     'Forgot Password',
                     style: TextStyle(
@@ -77,9 +75,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       color: AppColors.textBlack,
                     ),
                   ),
-
                   const SizedBox(height: 8),
-
                   const Text(
                     'Enter your registered email address to receive a password reset link.',
                     style: TextStyle(
@@ -88,9 +84,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       height: 1.5,
                     ),
                   ),
-
                   const SizedBox(height: 30),
-
                   Container(
                     padding: const EdgeInsets.all(22),
                     decoration: BoxDecoration(
@@ -123,21 +117,28 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             color: AppColors.primaryBlue,
                           ),
                         ),
-
                         const SizedBox(height: 22),
-
                         AppTextField(
                           controller: emailController,
                           label: 'Email Address',
                           hintText: 'example@email.com',
                           keyboardType: TextInputType.emailAddress,
                         ),
-
                         const SizedBox(height: 22),
-
                         AppButton(
                           text: loading ? 'Please wait...' : 'Send Reset Link',
                           onTap: loading ? null : resetPassword,
+                        ),
+                        const SizedBox(height: 14),
+                        TextButton(
+                          onPressed: () => context.go(RouteNames.login),
+                          child: const Text(
+                            'Back to Login',
+                            style: TextStyle(
+                              color: AppColors.primaryBlue,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ],
                     ),
