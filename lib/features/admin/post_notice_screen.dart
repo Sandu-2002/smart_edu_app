@@ -46,7 +46,14 @@ class PostNoticeScreen extends StatelessWidget {
 
                   const Padding(
                     padding: EdgeInsets.all(18),
-                    child: _NoticeFormCard(),
+                    child: Column(
+                      children: [
+                        _NoticeFormCard(),
+                        SizedBox(height: 18),
+
+                        _NoticePreviewCard(),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -78,14 +85,12 @@ class _NoticeFormCard extends StatelessWidget {
           AppTextField(
             label: 'Subject',
             hintText: 'Enter notice title',
-            keyboardType: TextInputType.text,
           ),
           SizedBox(height: 14),
 
           AppTextField(
             label: 'Audience',
             hintText: 'Students / Parents / Teachers',
-            keyboardType: TextInputType.text,
           ),
           SizedBox(height: 14),
 
@@ -93,7 +98,6 @@ class _NoticeFormCard extends StatelessWidget {
             label: 'Notice Body',
             hintText: 'Write the full notice content here',
             maxLines: 6,
-            keyboardType: TextInputType.multiline,
           ),
           SizedBox(height: 14),
 
@@ -113,20 +117,102 @@ class _NoticeFormCard extends StatelessWidget {
   }
 }
 
+
+class _NoticePreviewCard extends StatelessWidget {
+  const _NoticePreviewCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const _SectionTitle(title: 'Notice Preview'),
+          const SizedBox(height: 14),
+
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF9F9F9),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF5DE9B),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        'URGENT',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      'Today',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+
+                const Text(
+                  'Portal Maintenance Notice',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                const Text(
+                  'Audience: Students / Parents / Teachers',
+                  style: TextStyle(fontSize: 13),
+                ),
+                const SizedBox(height: 12),
+
+                const Text(
+                  'Portal maintenance schedules for Sunday, 02.00 A.M - 08.00 A.M.',
+                  style: TextStyle(height: 1.5),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
 class _SectionTitle extends StatelessWidget {
   final String title;
-
   const _SectionTitle({required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 5,
-          height: 20,
-          color: Colors.blue,
-        ),
+        Container(width: 5, height: 20, color: Colors.blue),
         const SizedBox(width: 10),
         Text(
           title,
@@ -165,34 +251,9 @@ class _UploadTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 46,
-            height: 46,
-            decoration: BoxDecoration(
-              color: iconBg,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: iconColor),
-          ),
+          Icon(icon, color: iconColor),
           const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ],
-            ),
-          ),
+          Expanded(child: Text(title)),
           const Icon(Icons.chevron_right_rounded),
         ],
       ),
