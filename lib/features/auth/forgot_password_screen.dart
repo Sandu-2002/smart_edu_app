@@ -55,36 +55,64 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  onPressed: () => context.go(RouteNames.login),
-                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                ),
-
-                const SizedBox(height: 12),
-
-                const Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textBlack,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 420),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IconButton(
+                    onPressed: () => context.go(RouteNames.login),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
                   ),
-                ),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 12),
 
-                const Text(
-                  'Enter your registered email address to receive a password reset link.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.mutedText,
-                    height: 1.5,
+                  const Text(
+                    'Forgot Password',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textBlack,
+                    ),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 8),
+
+                  const Text(
+                    'Enter your registered email address to receive a password reset link.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.mutedText,
+                      height: 1.5,
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  Container(
+                    padding: const EdgeInsets.all(22),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(22),
+                      border: Border.all(
+                        color: AppColors.borderBlue,
+                        width: 1.2,
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x12000000),
+                          blurRadius: 12,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
