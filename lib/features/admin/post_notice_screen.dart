@@ -95,6 +95,18 @@ class _NoticeFormCard extends StatelessWidget {
             maxLines: 6,
             keyboardType: TextInputType.multiline,
           ),
+          SizedBox(height: 14),
+
+          _UploadTile(
+            title: 'Attach File',
+            subtitle: 'Optional PDF or image attachment',
+            icon: Icons.attach_file_rounded,
+            iconBg: Color(0xFFD7DDF4),
+            iconColor: AppColors.primaryBlue,
+          ),
+          SizedBox(height: 14),
+
+          _UrgentSwitch(),
         ],
       ),
     );
@@ -124,6 +136,81 @@ class _SectionTitle extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _UploadTile extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color iconBg;
+  final Color iconColor;
+
+  const _UploadTile({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.iconBg,
+    required this.iconColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF9F9F9),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: iconBg,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: iconColor),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded),
+        ],
+      ),
+    );
+  }
+}
+
+class _UrgentSwitch extends StatelessWidget {
+  const _UrgentSwitch();
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      value: true,
+      onChanged: (_) {},
+      activeColor: AppColors.primaryBlue,
+      title: const Text('Mark as urgent'),
+      subtitle: const Text('This notice will be highlighted'),
     );
   }
 }
