@@ -64,11 +64,73 @@ class ParentChatScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              /// Temporary (next step: chat list)
-              Text('Chats (${chats.length})'),
+              Expanded(
+                child: ListView(
+                  children: chats
+                      .map(
+                        (chat) => _ChatTile(
+                          name: chat['name']!,
+                          message: chat['message']!,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ChatTile extends StatelessWidget {
+  final String name;
+  final String message;
+
+  const _ChatTile({
+    required this.name,
+    required this.message,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppColors.borderBlue),
+      ),
+      child: Row(
+        children: [
+          const CircleAvatar(radius: 24),
+          const SizedBox(width: 12),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textBlack,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  message,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: AppColors.mutedText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
