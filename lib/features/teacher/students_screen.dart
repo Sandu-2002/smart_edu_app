@@ -74,14 +74,12 @@ class TeacherStudentsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(18),
                 child: Column(
                   children: [
                     const SearchBox(hintText: 'Search students'),
                     const SizedBox(height: 16),
-
                     Row(
                       children: const [
                         _FilterChip(
@@ -103,11 +101,9 @@ class TeacherStudentsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 18),
-
                     ...students.map(
-                      (student) => StudentTile(
+                      (student) => _StudentTile(
                         name: student['name']! as String,
                         id: student['id']! as String,
                         className: student['class']! as String,
@@ -126,18 +122,14 @@ class TeacherStudentsScreen extends StatelessWidget {
   }
 }
 
-//
-// Student Tile Widget
-//
-class StudentTile extends StatelessWidget {
+class _StudentTile extends StatelessWidget {
   final String name;
   final String id;
   final String className;
   final String status;
   final Color statusColor;
 
-  const StudentTile({
-    super.key,
+  const _StudentTile({
     required this.name,
     required this.id,
     required this.className,
@@ -156,7 +148,6 @@ class StudentTile extends StatelessWidget {
         children: [
           const CircleAvatar(radius: 24),
           const SizedBox(width: 12),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +180,7 @@ class StudentTile extends StatelessWidget {
               ],
             ),
           ),
-
+          const SizedBox(width: 10),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
@@ -205,7 +196,6 @@ class StudentTile extends StatelessWidget {
               ),
             ),
           ),
-
           const SizedBox(width: 8),
           const Icon(Icons.chevron_right_rounded, color: AppColors.primaryBlue),
         ],
@@ -214,9 +204,6 @@ class StudentTile extends StatelessWidget {
   }
 }
 
-//
-// Filter Chip Widget
-//
 class _FilterChip extends StatelessWidget {
   final String text;
   final Color color;
@@ -248,9 +235,6 @@ class _FilterChip extends StatelessWidget {
   }
 }
 
-//
-// Box Decoration
-//
 BoxDecoration _box() {
   return BoxDecoration(
     color: Colors.white,
