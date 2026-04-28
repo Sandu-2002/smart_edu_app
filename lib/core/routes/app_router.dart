@@ -10,6 +10,7 @@ import '../../features/auth/login_screen.dart';
 import '../../features/parent/parent_shell.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/student/guide_books_screen.dart';
+import '../../features/student/profile_screen.dart';
 import '../../features/student/short_notes_screen.dart';
 import '../../features/student/student_shell.dart';
 import '../../features/teacher/attendance_screen.dart';
