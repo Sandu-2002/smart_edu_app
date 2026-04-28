@@ -205,6 +205,7 @@ class _PerformanceCard extends StatelessWidget {
   }
 }
 
+/// ---------------- SMALL STAT (IMPROVED) ----------------
 class _SmallStat extends StatelessWidget {
   final String title;
   final String value;
@@ -223,17 +224,48 @@ class _SmallStat extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFF9F9F9),
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.borderSoft),
       ),
       child: Row(
         children: [
-          Icon(icon),
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: const Color(0xFFD7DDF4),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.primaryBlue,
+              size: 22,
+            ),
+          ),
+
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title),
-              Text(value),
-            ],
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppColors.mutedText,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textBlack,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
