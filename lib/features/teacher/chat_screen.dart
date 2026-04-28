@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/widgets/search_box.dart';
 import '../../core/widgets/top_blue_header.dart';
-import 'widgets/chat_tile.dart';
-import 'widgets/filter_chip.dart';
 
 class TeacherChatScreen extends StatelessWidget {
   const TeacherChatScreen({super.key});
@@ -82,33 +80,30 @@ class TeacherChatScreen extends StatelessWidget {
                   children: [
                     const SearchBox(hintText: 'Search parent'),
                     const SizedBox(height: 16),
-
                     Row(
                       children: const [
-                        FilterChipWidget(
+                        _FilterChip(
                           text: 'All',
                           color: Color(0xFFD7DDF4),
                           textColor: AppColors.primaryBlue,
                         ),
                         SizedBox(width: 8),
-                        FilterChipWidget(
+                        _FilterChip(
                           text: 'Unread',
                           color: Color(0xFFF5DE9B),
                           textColor: AppColors.textBlack,
                         ),
                         SizedBox(width: 8),
-                        FilterChipWidget(
+                        _FilterChip(
                           text: 'Important',
                           color: Color(0xFFCBE8C7),
                           textColor: AppColors.textBlack,
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 18),
-
                     ...chats.map(
-                      (chat) => ChatTile(
+                      (chat) => _ChatTile(
                         name: chat['name']!,
                         role: chat['role']!,
                         message: chat['message']!,
@@ -125,4 +120,172 @@ class TeacherChatScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ChatTile extends StatelessWidget {
+  final String name;
+  final String role;
+  final String message;
+  final String time;
+  final String unread;
+
+  const _ChatTile({
+    required this.name,
+    required this.role,
+    required this.message,
+    required this.time,
+    required this.unread,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hasUnread = unread != '0';
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(14),
+      decoration: _box(),
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              const CircleAvatar(radius: 24),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF34C759),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: 2),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textBlack,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      time,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.mutedText,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  role,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.primaryBlue,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        message,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppColors.textBlack,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                    if (hasUnread) ...[
+                      const SizedBox(width: 10),
+                      Container(
+                        width: 22,
+                        height: 22,
+                        decoration: const BoxDecoration(
+                          color: AppColors.primaryBlue,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            unread,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FilterChip extends StatelessWidget {
+  final String text;
+  final Color color;
+  final Color textColor;
+
+  const _FilterChip({
+    required this.text,
+    required this.color,
+    required this.textColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(22),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+          color: textColor,
+        ),
+      ),
+    );
+  }
+}
+
+BoxDecoration _box() {
+  return BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(color: AppColors.borderBlue, width: 1.2),
+    boxShadow: const [
+      BoxShadow(color: Color(0x12000000), blurRadius: 10, offset: Offset(0, 4)),
+    ],
+  );
 }
