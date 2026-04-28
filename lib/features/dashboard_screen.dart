@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/widgets/top_blue_header.dart';
-import '../../core/widgets/circular_avatar.dart';
 import '../../core/routes/route_names.dart';
+import '../../core/widgets/circular_avatar.dart';
+import '../../core/widgets/top_blue_header.dart';
 
 class ParentDashboardScreen extends StatelessWidget {
   const ParentDashboardScreen({super.key});
@@ -58,7 +58,6 @@ class ParentDashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(18),
               child: Column(
@@ -68,8 +67,8 @@ class ParentDashboardScreen extends StatelessWidget {
                   _ParentQuickActions(),
                   SizedBox(height: 18),
                   _PerformanceCard(),
-
                   SizedBox(height: 18),
+                  _TeacherMessagesCard(),
                 ],
               ),
             ),
@@ -92,6 +91,13 @@ class _StudentHeroCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.borderBlue, width: 1.2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x12000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -101,10 +107,44 @@ class _StudentHeroCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aruja Wirarathna'),
-                Text('Grade 11-B'),
-                Text('STU-2026-0001'),
+                Text(
+                  'Aruja Wirarathna',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textBlack,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Grade 11-B',
+                  style: TextStyle(color: AppColors.mutedText, fontSize: 13),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'STU-2026-0001',
+                  style: TextStyle(
+                    color: AppColors.primaryBlue,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: const Color(0xFFCBE8C7),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Text(
+              'Active',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textBlack,
+              ),
             ),
           ),
         ],
@@ -137,15 +177,47 @@ class _ParentQuickActions extends StatelessWidget {
     ];
 
     return Row(
-      children: items.map((item) {
+      children: items.asMap().entries.map((entry) {
+        final index = entry.key;
+        final item = entry.value;
+
         return Expanded(
-          child: GestureDetector(
-            onTap: () => context.go(item['route']! as String),
-            child: Column(
-              children: [
-                Icon(item['icon']! as IconData),
-                Text(item['title']! as String),
-              ],
+          child: Container(
+            margin: EdgeInsets.only(right: index == items.length - 1 ? 0 : 10),
+            child: GestureDetector(
+              onTap: () => context.go(item['route']! as String),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: AppColors.borderBlue, width: 1.2),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x12000000),
+                      blurRadius: 10,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Icon(
+                      item['icon']! as IconData,
+                      color: AppColors.primaryBlue,
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      item['title']! as String,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textBlack,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         );
@@ -166,6 +238,13 @@ class _PerformanceCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.borderBlue, width: 1.2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x12000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +258,6 @@ class _PerformanceCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-
           Row(
             children: const [
               Expanded(
@@ -199,13 +277,90 @@ class _PerformanceCard extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 14),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF9F9F9),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppColors.borderSoft),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 26,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFCBE8C7),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text('Math', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 68,
+                        width: 26,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD7DDF4),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text('Sci', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 56,
+                        width: 26,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF5DE9B),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text('Eng', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 84,
+                        width: 26,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFCBE8C7),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text('ICT', style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-/// ---------------- SMALL STAT (IMPROVED) ----------------
 class _SmallStat extends StatelessWidget {
   final String title;
   final String value;
@@ -235,15 +390,9 @@ class _SmallStat extends StatelessWidget {
               color: const Color(0xFFD7DDF4),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              icon,
-              color: AppColors.primaryBlue,
-              size: 22,
-            ),
+            child: Icon(icon, color: AppColors.primaryBlue, size: 22),
           ),
-
           const SizedBox(width: 10),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,6 +414,114 @@ class _SmallStat extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TeacherMessagesCard extends StatelessWidget {
+  const _TeacherMessagesCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final messages = [
+      {
+        'name': 'Mr. Nuwan',
+        'role': 'ICT Teacher',
+        'message': 'Homework uploaded',
+      },
+      {
+        'name': 'Mrs. Dilki',
+        'role': 'Math Teacher',
+        'message': 'Please sign the report',
+      },
+      {
+        'name': 'Mr. Rukshan',
+        'role': 'Science Teacher',
+        'message': 'Lab tomorrow at 10.00 AM',
+      },
+    ];
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.borderBlue, width: 1.2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x12000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Message Teachers',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textBlack,
+            ),
+          ),
+          const SizedBox(height: 14),
+          ...messages.map(
+            (item) => Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF9F9F9),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.borderSoft),
+              ),
+              child: Row(
+                children: [
+                  const CircleAvatar(radius: 22),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['name']!,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textBlack,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          item['role']!,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.mutedText,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          item['message']!,
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: AppColors.textBlack,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(
+                    Icons.chevron_right_rounded,
+                    color: AppColors.primaryBlue,
+                  ),
+                ],
+              ),
             ),
           ),
         ],
