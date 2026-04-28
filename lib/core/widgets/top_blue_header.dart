@@ -14,7 +14,7 @@ class TopBlueHeader extends StatelessWidget {
     super.key,
     required this.child,
     this.height = AppSizes.headerHeight,
-    this.padding = const EdgeInsets.fromLTRB(0, 0, 0, 0),
+    this.padding = const EdgeInsets.fromLTRB(28, 20, 28, 26),
     this.showGlow = true,
     this.showBottomCurve = true,
   });
@@ -24,7 +24,6 @@ class TopBlueHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: height,
-      padding: padding,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -35,53 +34,53 @@ class TopBlueHeader extends StatelessWidget {
           bottomLeft: Radius.circular(showBottomCurve ? 34 : 0),
           bottomRight: Radius.circular(showBottomCurve ? 34 : 0),
         ),
-        boxShadow: showGlow
-            ? const [
-                BoxShadow(
-                  color: Color(0x33243F97),
-                  blurRadius: 18,
-                  offset: Offset(0, 8),
-                ),
-              ]
-            : null,
       ),
-      child: Stack(
-        children: [
-          if (showGlow) ...[
-            Positioned(
-              top: -35,
-              right: -25,
-              child: Container(
-                width: 130,
-                height: 130,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.08),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(showBottomCurve ? 34 : 0),
+          bottomRight: Radius.circular(showBottomCurve ? 34 : 0),
+        ),
+        child: Stack(
+          children: [
+            if (showGlow) ...[
+              Positioned(
+                top: -65,
+                right: -60,
+                child: Container(
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.07),
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: -45,
-              left: -30,
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.05),
+              Positioned(
+                bottom: -95,
+                left: -95,
+                child: Container(
+                  width: 190,
+                  height: 190,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.04),
+                  ),
+                ),
+              ),
+            ],
+            SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: padding,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: child,
                 ),
               ),
             ),
           ],
-          SafeArea(
-            bottom: false,
-            child: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: child,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
